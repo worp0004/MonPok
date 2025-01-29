@@ -1,8 +1,11 @@
 public class Main {
     public static void main(String[] args) {
         // Create player and enemy using Factory
-        Creature playerCreature = CreatureFactory.createCreature("Fire", "Flamizard");
-        Creature enemyCreature = CreatureFactory.createCreature("Basic", "Grassloth");
+        CreatureFactory fireFactory = new FireCreatureFactory();
+        Creature playerCreature = fireFactory.createCreature("Flamizard");
+
+        CreatureFactory basicFactory = new BasicCreatureFactory();
+        Creature enemyCreature = basicFactory.createCreature("Grassloth");
 
         // Setup observer and battle system
         GameLog gameLog = new GameLog();

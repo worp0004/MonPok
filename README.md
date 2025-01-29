@@ -2,15 +2,52 @@
 
 ## Design Patterns
 ### 1. Decorator Pattern
-- Dit patroon wordt gebruikt om dynamisch vaardigheden, zoals "Fire Attack", toe te voegen aan wezens.
-- Hiermee is het mogelijk om de vaardigheden van wezens flexibel uit te breiden zonder de basisklassen te wijzigen.
+  - **Creatie van FireCreature**: Het `CreatureDecorator` patroon wordt gebruikt om extra functionaliteit toe te voegen aan een bestaand wezen, zoals het toevoegen van de "Fire Attack" vaardigheid in de `FireCreature` klasse. 
+   - **Code**: `FireCreature` breidt `CreatureDecorator` uit en voegt extra vaardigheden toe aan een bestaand `Creature` object zonder de originele klasse aan te passen.
+
+   ```java
+   public class FireCreature extends CreatureDecorator {
+       public FireCreature(Creature creature) {
+           super(creature);
+       }
+
+       @Override
+       public String getAbilities() {
+           return decoratedCreature.getAbilities() + ", Fire Attack";
+       }
+   }
+   ```
+
 
 ### 2. Factory Pattern
-- Dit patroon vereenvoudigt de creatie van wezens door de objectinstantiëringslogica te verbergen.
-- Gebruikt om zowel "Fire" als "Basic"-wezens te creëren.
+   - **Abstract Factory**:  Dit maakt het mogelijk om verschillende soorten wezens te creëren (bijvoorbeeld `BasicCreature` en `FireCreature`) door het gebruik van aparte fabrieken, zoals `BasicCreatureFactory` en `FireCreatureFactory`.
+   - **Code**: De `CreatureFactory` is nu abstract, en de subklassen (`FireCreatureFactory` en `BasicCreatureFactory`) implementeren de `createCreature()` methode om specifieke wezens te maken.
+
+   ```java
+   public abstract class CreatureFactory {
+       public abstract Creature createCreature(String name);
+   }
+
+   public class FireCreatureFactory extends CreatureFactory {
+       @Override
+       public Creature createCreature(String name) {
+           return new FireCreature(new BasicCreature(name, 100));
+       }
+   }
+   ```
 
 ### 3. Observer Pattern
-- Dit patroon houdt de gebeurtenissen tijdens de strijd bij, zoals aanvallen en gezondheidveranderingen, en logt deze in realtime.
+   - **GameObserver**: Het `Observer Pattern` wordt gebruikt om het gevecht bij te houden en gebeurtenissen in realtime te loggen. Elke keer als er een belangrijke gebeurtenis plaatsvindt, zoals een aanval of het winnen van een gevecht, wordt een update verzonden naar de geregistreerde observers. De `GameLog` klasse implementeert de `GameObserver` interface en toont de updates in de console.
+   - **Code**: De `BattleSystem` klasse heeft de verantwoordelijkheid om de juiste updates te sturen naar de observers tijdens het gevecht.
+
+   ```java
+   public class GameLog implements GameObserver {
+       @Override
+       public void update(String event) {
+           System.out.println("Game Log: " + event);
+       }
+   }
+   ```
 
 ## Kenmerken
 - Interactief spel op basis van de console.
@@ -19,6 +56,10 @@
 
 
 ## Samenwerking
-- Mitchell werkte aan de implementatie van de Creatures en het gevechtssysteem.
+- Mitchell Boxhoorn werkte aan de implementatie van de Creatures en het gevechtssysteem.
 - Ricardo werkte aan de Factory en Observer-functionaliteit.
 - Taken zijn gelijk verdeeld en elk design pattern is gezamenlijk besproken. we hebben dit samen op school gemaakt op 1 laptop zodat we dingen konden bespreken waarom we het zo deden etc daarom is het 1 push geworden
+
+
+---
+
