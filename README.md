@@ -20,8 +20,8 @@
 
 
 ### 2. Factory Pattern
-   - **Abstract Factory**:  Dit maakt het mogelijk om verschillende soorten wezens te creëren (bijvoorbeeld `BasicCreature` en `FireCreature`) door het gebruik van aparte fabrieken, zoals `BasicCreatureFactory` en `FireCreatureFactory`.
-   - **Code**: De `CreatureFactory` is nu abstract, en de subklassen (`FireCreatureFactory` en `BasicCreatureFactory`) implementeren de `createCreature()` methode om specifieke wezens te maken.
+   - **Factory method pattern**:  Dit patroon maakt het mogelijk om verschillende soorten wezens te creëren (`BasicCreature` en `FireCreature`) zonder directe afhankelijkheden in de code. We gebruiken een Factory Method binnen afzonderlijke fabrieken (`BasicCreatureFactory` en `FireCreatureFactory`).
+   - **Code**: De `CreatureFactory` is een abstracte klasse met een factory method (`createCreature`), die wordt overschreven in de concrete subklassen (`FireCreatureFactory` en `BasicCreatureFactory`).
 
    ```java
    public abstract class CreatureFactory {
@@ -35,6 +35,13 @@
        }
    }
    ```
+### Waarom is dit een Factory Method Pattern?
+
+- Elke concrete factory implementeert de createCreature() methode op zijn eigen manier.
+
+= Dit voorkomt directe afhankelijkheden in de code en maakt uitbreiding eenvoudig.
+
+- De client (Main) gebruikt een factory zonder te weten welke specifieke implementatie erachter zit.
 
 ### 3. Observer Pattern
    - **GameObserver**: Het `Observer Pattern` wordt gebruikt om het gevecht bij te houden en gebeurtenissen in realtime te loggen. Elke keer als er een belangrijke gebeurtenis plaatsvindt, zoals een aanval of het winnen van een gevecht, wordt een update verzonden naar de geregistreerde observers. De `GameLog` klasse implementeert de `GameObserver` interface en toont de updates in de console.
