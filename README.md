@@ -39,7 +39,7 @@
 
 - Elke concrete factory implementeert de createCreature() methode op zijn eigen manier.
 
-= Dit voorkomt directe afhankelijkheden in de code en maakt uitbreiding eenvoudig.
+- Dit voorkomt directe afhankelijkheden in de code en maakt uitbreiding eenvoudig.
 
 - De client (Main) gebruikt een factory zonder te weten welke specifieke implementatie erachter zit.
 
